@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.xml.apixml.help.LogEventMapper;
@@ -24,6 +25,7 @@ import static java.util.Collections.singletonList;
 @Service
 public class LogService {
 
+	@Autowired
 	private final RenderingRepository repository;
     private final LogEventMapper logEventMapper;
     private final RenderingMapper renderingMapper;
@@ -69,14 +71,14 @@ public class LogService {
 
     private void handleStartRenderingReturned(final LogLine logLine) {
         String uid = renderingHelper.getMatcherUID(logLine).group(1);
-        Optional<Rendering> renderingById = repository.findById(uid);
+        Optional<Rendering> renderingById = Optional.of(Rendering.builder().UID("").build());//repository.findById(uid);
         Rendering rendering = null;
         if (renderingById.isPresent()) {
             rendering = renderingHelper.updateStartRendering(logLine.getTimestamp(), renderingById.get());
         } else {
             rendering = mountRenderingAndRemoveFromMap(logLine);
         }
-        repository.save(rendering);
+        //repository.save(rendering);
     }
 
     private Rendering mountRenderingAndRemoveFromMap(LogLine logLine) {
@@ -90,9 +92,9 @@ public class LogService {
 
     private void handleGetRendering(final LogLine logLine) {
         String uid = renderingHelper.getMatcherUID(logLine).group(1);
-        Optional<Rendering> optionalRendering = repository.findById(uid);
+        Optional<Rendering> optionalRendering = Optional.of(Rendering.builder().UID("").build());//repository.findById(uid);
         Rendering rendering = optionalRendering.map(value -> renderingHelper.updateGetRendering(logLine.getTimestamp(), value))
                 .orElseGet(() -> Rendering.builder().UID(uid).commandGetRenderings(singletonList(logLine.getTimestamp())).build());
-        repository.save(rendering);
+        //repository.save(rendering);
     }
 }
