@@ -40,7 +40,7 @@ public class ApiXmlApplication implements CommandLineRunner {
 			analyzeService.process(scanner.nextLine());
 		}
 		log.info("Log analyzed successfuly. Resulted saved!");
-		exit(0);
+		//exit(0);
 	}
 
 }

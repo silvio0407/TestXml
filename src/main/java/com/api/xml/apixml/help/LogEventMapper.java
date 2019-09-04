@@ -13,8 +13,8 @@ import static com.api.xml.apixml.model.EventType.*;
 @Component
 public class LogEventMapper {
 
-	private static final String START_RENDERING_MESSAGE = "Executing request startRendering";
-    private static final String START_RENDERING_RETURNED_MESSAGE = "Service startRendering returned";
+	private static final String START_RENDERING_MESSAGE = "ationConfigEmbeddedWebApplicationContext";
+    private static final String START_RENDERING_RETURNED_MESSAGE = "trationDelegate$BeanPostProcessorChecker";
     private static final String GET_RENDERING_MESSAGE = "Executing request getRendering";
 
     private final LogLineFactory logLineFactory;

@@ -71,14 +71,16 @@ public class LogService {
 
     private void handleStartRenderingReturned(final LogLine logLine) {
         String uid = renderingHelper.getMatcherUID(logLine).group(1);
-        Optional<Rendering> renderingById = Optional.of(Rendering.builder().UID("").build());//repository.findById(uid);
+       /* Optional<Rendering> renderingById = Optional.of(Rendering.builder().UID(Integer.valueOf("")).build());//repository.findById(uid);
         Rendering rendering = null;
         if (renderingById.isPresent()) {
             rendering = renderingHelper.updateStartRendering(logLine.getTimestamp(), renderingById.get());
         } else {
             rendering = mountRenderingAndRemoveFromMap(logLine);
-        }
-        //repository.save(rendering);
+        }*/
+        
+        Rendering rendering = Rendering.builder().UID(Integer.valueOf(uid)).documentId("123").page("0").build();
+        repository.save(rendering);
     }
 
     private Rendering mountRenderingAndRemoveFromMap(LogLine logLine) {
@@ -92,9 +94,9 @@ public class LogService {
 
     private void handleGetRendering(final LogLine logLine) {
         String uid = renderingHelper.getMatcherUID(logLine).group(1);
-        Optional<Rendering> optionalRendering = Optional.of(Rendering.builder().UID("").build());//repository.findById(uid);
+        Optional<Rendering> optionalRendering = Optional.of(Rendering.builder().UID(Integer.valueOf("")).build());//repository.findById(uid);
         Rendering rendering = optionalRendering.map(value -> renderingHelper.updateGetRendering(logLine.getTimestamp(), value))
-                .orElseGet(() -> Rendering.builder().UID(uid).commandGetRenderings(singletonList(logLine.getTimestamp())).build());
+                .orElseGet(() -> Rendering.builder().UID(Integer.valueOf(uid)).commandGetRenderings(singletonList(logLine.getTimestamp())).build());
         //repository.save(rendering);
     }
 }

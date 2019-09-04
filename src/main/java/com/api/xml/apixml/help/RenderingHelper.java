@@ -16,7 +16,7 @@ import static java.util.Collections.singletonList;
 public class RenderingHelper {
 
 	private static final Pattern DOCUMENT_AND_PAGE_PATTERN = Pattern.compile("\\[(\\d+),\\s(\\d+)]");
-    private static final Pattern UID_PATTERN = Pattern.compile("(\\d+-\\d+)");
+    private static final Pattern UID_PATTERN = Pattern.compile("(\\d+)");
 
     public Matcher getMatcherDocumentAndPage(LogLine logLine) {
         final Matcher documentAndPageMatcher = DOCUMENT_AND_PAGE_PATTERN.matcher(logLine.getMessage());
@@ -27,9 +27,10 @@ public class RenderingHelper {
     }
 
     public Matcher getMatcherUID(LogLine logLine) {
-        final Matcher uIDMatcher = UID_PATTERN.matcher(logLine.getMessage());
+        final Matcher uIDMatcher = UID_PATTERN.matcher("2019 " + logLine.getMessage());
         if (!uIDMatcher.find()) {
-            throw new NotFoundUIDException();
+           // throw new NotFoundUIDException();
+        	System.out.println("Not Find uID");
         }
         return uIDMatcher;
     }

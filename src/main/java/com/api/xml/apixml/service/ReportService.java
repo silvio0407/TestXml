@@ -32,7 +32,7 @@ public class ReportService {
         Integer unnecessary = 0;
         Integer duplicates = 0;
 
-       /* for (Rendering rendering : repository.findAll()) {
+        for (Rendering rendering : repository.findAll()) {
             if (rendering.getCommandStarts() != null) {
                 if (rendering.getCommandGetRenderings() == null) {
                     unnecessary++;
@@ -43,7 +43,7 @@ public class ReportService {
                 }
             }
             renderings.add(rendering);
-        }*/
+        }
 
         Summary summary = Summary.builder()
                 .count(renderings.size() + unnecessary)
