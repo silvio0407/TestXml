@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,15 +72,15 @@ public class LogService {
 
     private void handleStartRenderingReturned(final LogLine logLine) {
         String uid = renderingHelper.getMatcherUID(logLine).group(1);
-       /* Optional<Rendering> renderingById = Optional.of(Rendering.builder().UID(Integer.valueOf("")).build());//repository.findById(uid);
+        Optional<Rendering> renderingById = repository.findById(Integer.valueOf(uid));//Optional.of(Rendering.builder().UID(Integer.valueOf("")).build());
         Rendering rendering = null;
         if (renderingById.isPresent()) {
             rendering = renderingHelper.updateStartRendering(logLine.getTimestamp(), renderingById.get());
         } else {
             rendering = mountRenderingAndRemoveFromMap(logLine);
-        }*/
+        }
         
-        Rendering rendering = Rendering.builder().UID(Integer.valueOf(uid)).documentId("123").page("0").build();
+        //Rendering rendering = Rendering.builder().UID(Integer.valueOf(uid) + new Random().nextInt(9)).documentId("123").page("0").build();
         repository.save(rendering);
     }
 

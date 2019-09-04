@@ -16,7 +16,7 @@ public class LogLineFactory {
 	 private static final String TIME_STAMP_PATTERN = "^\\d{4}-\\d{2}-\\d{2}\\s[\\d:.]*"; // ^\d{4}-\d{2}-\d{2} [\d:.]* - (^\d{4}-\d{2}-\d{2}) ([\d:.]*) +[A-Z]{4,5}
 	    private static final String THREAD_PATTERN = "[A-Z]{4,5}";
 	    private static final String LOG_LEVEL_PATTERN = "[a-zA-Z]+";
-	    private static final String MESSAGE_SENDER_CLASS_PATTERN = "[a-zA-Z$]{40}";
+	    private static final String MESSAGE_SENDER_CLASS_PATTERN = "[0-9]\\s[a-zA-Z$]{40}";
 	    private static final String MESSAGE_PATTERN = "[0-9a-zA-Z'.\\s\\[$\\]\\(;:-]+";
 	    private static final Pattern LOG_LINE_PATTERN = Pattern.compile("(" + TIME_STAMP_PATTERN + ")\\s+(" + THREAD_PATTERN + ")\\s+[0-9]{5}\\s[-]{3}\\s[\\[\\s]+" +
 	            "(" + LOG_LEVEL_PATTERN + ")]\\s(" + MESSAGE_SENDER_CLASS_PATTERN + ")[\\s:]+(" + MESSAGE_PATTERN + ")\\)*");
